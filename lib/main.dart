@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wook_application/direct/direct_messages.dart';
 import 'package:wook_application/direct/direct_messages_body.dart';
 import 'package:wook_application/feed/insta_body.dart';
+import 'package:wook_application/profile/profile.dart';
 import 'package:wook_application/settings/settings_screen.dart';
 import 'package:wook_application/util/hex_color.dart';
 
@@ -28,6 +28,7 @@ class TabBarDemo extends StatelessWidget {
                 color: HexColor.fromHex("#F2EFE9"),
               ),
               new Container(
+                child: Profile(),
                 color: HexColor.fromHex("#F2EFE9"),
               ),
               new Container(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wook_application/util/hex_color.dart';
+import 'post.dart';
 import 'insta_stories.dart';
-
-
 
 class InstaList extends StatefulWidget {
   @override
@@ -10,19 +10,23 @@ class InstaList extends StatefulWidget {
 }
 
 class _InstaListState extends State<InstaList> {
-  bool isPressed = false;
+  bool isPressedHeart = false;
+  bool isPressedBook = false;
 
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) => index == 0
-          ? new SizedBox(
+        itemCount: Post.dummyData.length + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return new SizedBox(
               child: new InstaStories(),
               height: deviceSize.height * 0.15,
-            )
-          : Column(
+            );
+          } else if (index < Post.dummyData.length) {
+            Post _post = Post.dummyData[index];
+            return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,7 +53,7 @@ class _InstaListState extends State<InstaList> {
                             width: 10.0,
                           ),
                           new Text(
-                            "imthpk",
+                            _post.name,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -61,45 +65,67 @@ class _InstaListState extends State<InstaList> {
                     ],
                   ),
                 ),
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: new Image.network(
-                    "https://www.thespruceeats.com/thmb/wbP95DvGDlZLDRTaM_4Bc3AT1Wc=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/UnicornCupcakesHERO-30b2fd66a8db4a50b90129c402aa25c4.jpg",
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  child: Hero(
+                    tag: _post.id,
+                    child: Image.network(
+                      _post.photoUrl,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return DetailScreen(_post);
+                    }));
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           new IconButton(
-                            icon: new Icon(isPressed
+                            icon: new Icon(isPressedHeart
                                 ? Icons.favorite
                                 : FontAwesomeIcons.heart),
-                            color: isPressed ? Colors.red : Colors.black,
+                            color: isPressedHeart
+                                ? HexColor.fromHex("#904E55")
+                                : HexColor.fromHex("#564E58"),
                             onPressed: () {
                               setState(() {
-                                isPressed = !isPressed;
+                                isPressedHeart = !isPressedHeart;
+                              });
+                            },
+                          ),
+                          new SizedBox(
+                            width: 5.0,
+                          ),
+                          new IconButton(
+                            icon: new Icon(FontAwesomeIcons.book),
+                            color: isPressedBook
+                                ? HexColor.fromHex("#904E55")
+                                : HexColor.fromHex("#564E58"),
+                            onPressed: () {
+                              setState(() {
+                                isPressedBook = !isPressedBook;
                               });
                             },
                           ),
                           new SizedBox(
                             width: 16.0,
                           ),
-                          new Icon(
-                            FontAwesomeIcons.comment,
-                          ),
-                          new SizedBox(
-                            width: 16.0,
-                          ),
-                          new Icon(FontAwesomeIcons.paperPlane),
                         ],
                       ),
-                      new Icon(FontAwesomeIcons.bookmark)
+                      new IconButton(
+                        icon: new Icon(FontAwesomeIcons.comment),
+                        color: HexColor.fromHex("#564E58"),
+                        onPressed: () {
+                          setState(() {
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -142,11 +168,37 @@ class _InstaListState extends State<InstaList> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child:
-                      Text("1 Day Ago", style: TextStyle(color: Colors.grey)),
+                  child: Text(_post.datetime,
+                      style: TextStyle(color: Colors.grey)),
                 )
               ],
-            ),
+            );
+          } else {
+            return Column();
+          }
+        });
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final Post _post;
+
+  DetailScreen(this._post);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: _post.id,
+            child: Image.network(_post.photoUrl),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

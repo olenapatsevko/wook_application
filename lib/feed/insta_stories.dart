@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wook_application/util/hex_color.dart';
 
 class InstaStories extends StatelessWidget {
   final topText = Row(
@@ -8,12 +9,6 @@ class InstaStories extends StatelessWidget {
         "Stories",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      new Row(
-        children: <Widget>[
-          new Icon(Icons.play_arrow),
-          new Text("Watch All", style: TextStyle(fontWeight: FontWeight.bold))
-        ],
-      )
     ],
   );
 
@@ -27,29 +22,27 @@ class InstaStories extends StatelessWidget {
               alignment: Alignment.bottomRight,
               children: <Widget>[
                 new Container(
-                  width: 60.0,
-                  height: 60.0,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: new DecorationImage(
-                        fit: BoxFit.cover,
-                        image: new NetworkImage(
-                            "https://miro.medium.com/max/875/1*ptA8nriUFoDc7wrAvV5O7g.jpeg")),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      "https://miro.medium.com/max/875/1*ptA8nriUFoDc7wrAvV5O7g.jpeg",
+                    ),
+                    radius: 20.0,
                   ),
-                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 ),
                 index == 0
                     ? Positioned(
                         right: 10.0,
                         child: new CircleAvatar(
-                          backgroundColor: Colors.blueAccent,
+                          backgroundColor: HexColor.fromHex("#904E55"),
                           radius: 10.0,
                           child: new Icon(
                             Icons.add,
                             size: 14.0,
                             color: Colors.white,
                           ),
-                        ))
+                        )
+                )
                     : new Container()
               ],
             ),
