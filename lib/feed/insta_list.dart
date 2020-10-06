@@ -132,7 +132,7 @@ class _InstaListState extends State<InstaList> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    "Liked by pawankumar, pk and 528,331 others",
+                    "Likes: "+ _post.numberOfLikes.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

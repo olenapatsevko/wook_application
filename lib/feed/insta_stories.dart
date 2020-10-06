@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wook_application/feed/stories.dart';
 import 'package:wook_application/util/hex_color.dart';
 
 class InstaStories extends StatelessWidget {
@@ -16,37 +17,31 @@ class InstaStories extends StatelessWidget {
     child: new Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: new ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 5,
-        itemBuilder: (context, index) => new Stack(
-              alignment: Alignment.bottomRight,
-              children: <Widget>[
-                new Container(
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      "https://miro.medium.com/max/875/1*ptA8nriUFoDc7wrAvV5O7g.jpeg",
+          scrollDirection: Axis.horizontal,
+          itemCount: Stories.dummyData.length,
+          itemBuilder: (context, index) {
+            Stories _stories = Stories.dummyData[index];
+            return new Stack(
+                alignment: Alignment.bottomRight,
+                children: <Widget>[
+                  new Container(
+                    child: GestureDetector(
+                      child: Hero(
+                        tag: _stories.id,
+                        child: Image.network(
+                          _stories.photoUrl,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return StoriesScreen(_stories);
+                        }));
+                      },
                     ),
-                    radius: 20.0,
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
                   ),
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                ),
-                index == 0
-                    ? Positioned(
-                        right: 10.0,
-                        child: new CircleAvatar(
-                          backgroundColor: HexColor.fromHex("#904E55"),
-                          radius: 10.0,
-                          child: new Icon(
-                            Icons.add,
-                            size: 14.0,
-                            color: Colors.white,
-                          ),
-                        )
-                )
-                    : new Container()
-              ],
-            ),
-      ),
+                ]);
+          }),
     ),
   );
 
@@ -62,6 +57,28 @@ class InstaStories extends StatelessWidget {
           topText,
           stories,
         ],
+      ),
+    );
+  }
+}
+class StoriesScreen extends StatelessWidget {
+  final Stories _post;
+
+  StoriesScreen(this._post);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: _post.id,
+            child: Image.network(_post.photoUrl),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

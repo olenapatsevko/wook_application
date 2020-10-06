@@ -13,7 +13,7 @@ void main() {
 class TabBarDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
-      color: Colors.yellow,
+      color: HexColor.fromHex("#F2EFE9"),
       home: DefaultTabController(
         length: 4,
         child: new Scaffold(
