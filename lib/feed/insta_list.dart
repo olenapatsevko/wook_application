@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wook_application/notifiers/LikeNotifier.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'post.dart';
 import 'insta_stories.dart';
+import 'package:provider/provider.dart';
 
 class InstaList extends StatefulWidget {
   @override
@@ -79,60 +81,62 @@ class _InstaListState extends State<InstaList> {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Row(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ChangeNotifierProvider<LikeNotifier>(
+                      builder: (_) => LikeNotifier(),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new IconButton(
+                                icon: new Icon(isPressedHeart
+                                    ? Icons.favorite
+                                    : FontAwesomeIcons.heart),
+                                color: isPressedHeart
+                                    ? HexColor.fromHex("#904E55")
+                                    : HexColor.fromHex("#564E58"),
+                                onPressed: () {
+                                  setState(() {
+                                    isPressedHeart = !isPressedHeart;
+                                  });
+                                },
+                              ),
+                              new SizedBox(
+                                width: 5.0,
+                              ),
+                              new IconButton(
+                                icon: new Icon(FontAwesomeIcons.book),
+                                color: isPressedBook
+                                    ? HexColor.fromHex("#904E55")
+                                    : HexColor.fromHex("#564E58"),
+                                onPressed: () {
+                                  setState(() {
+                                    isPressedBook = !isPressedBook;
+                                  });
+                                },
+                              ),
+                              new SizedBox(
+                                width: 16.0,
+                              ),
+                            ],
+                          ),
                           new IconButton(
-                            icon: new Icon(isPressedHeart
-                                ? Icons.favorite
-                                : FontAwesomeIcons.heart),
-                            color: isPressedHeart
-                                ? HexColor.fromHex("#904E55")
-                                : HexColor.fromHex("#564E58"),
+                            icon: new Icon(FontAwesomeIcons.comment),
+                            color: HexColor.fromHex("#564E58"),
                             onPressed: () {
-                              setState(() {
-                                isPressedHeart = !isPressedHeart;
-                              });
+                              setState(() {});
                             },
-                          ),
-                          new SizedBox(
-                            width: 5.0,
-                          ),
-                          new IconButton(
-                            icon: new Icon(FontAwesomeIcons.book),
-                            color: isPressedBook
-                                ? HexColor.fromHex("#904E55")
-                                : HexColor.fromHex("#564E58"),
-                            onPressed: () {
-                              setState(() {
-                                isPressedBook = !isPressedBook;
-                              });
-                            },
-                          ),
-                          new SizedBox(
-                            width: 16.0,
                           ),
                         ],
                       ),
-                      new IconButton(
-                        icon: new Icon(FontAwesomeIcons.comment),
-                        color: HexColor.fromHex("#564E58"),
-                        onPressed: () {
-                          setState(() {
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                    )
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    "Likes: "+ _post.numberOfLikes.toString(),
+                    "Likes: " + _post.numberOfLikes.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
