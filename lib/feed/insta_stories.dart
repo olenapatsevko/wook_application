@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/feed/stories.dart';
-import 'package:wook_application/util/hex_color.dart';
 
 class InstaStories extends StatelessWidget {
   final topText = Row(
