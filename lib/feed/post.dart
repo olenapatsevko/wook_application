@@ -29,11 +29,7 @@ class PostPageState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('${widget.name}'),
-        ),
-        body: Column(
+    return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -60,6 +56,7 @@ class PostPageState extends State<Post> {
                         width: 10.0,
                       ),
                       new Text(
+
                         widget.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
@@ -73,9 +70,12 @@ class PostPageState extends State<Post> {
               ),
             ),
             GestureDetector(
+
               child: Hero(
+
                 tag: widget.id,
                 child: Image.network(
+
                   widget.photoUrl,
                 ),
               ),
@@ -179,7 +179,7 @@ class PostPageState extends State<Post> {
                   widget.datetime, style: TextStyle(color: Colors.grey)),
             )
           ],
-        ));
+        );
   }
 
   void doLikeFunction(int nLikes) {

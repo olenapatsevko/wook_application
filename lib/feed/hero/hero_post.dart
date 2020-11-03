@@ -39,6 +39,8 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
         Stack(
           children: [
             Container(
+              width: 200.0,
+              height: 300.0,
               child: Hero(
                 tag: '${widget.id}',
                 child:Image.network( widget.photoUrl),
