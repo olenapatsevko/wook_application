@@ -1,15 +1,16 @@
 class Stories {
-  final String photoUrl;
-  final String name;
-  final String datetime;
-  final String message;
-  final String id;
+   String photoUrl;
+   String name;
+   String datetime;
+   String message;
+   String id;
+  bool seen  = false;
 
   Stories({this.photoUrl, this.name, this.datetime, this.message, this.id});
 
   static final List<Stories> dummyData = [
     Stories(
-        photoUrl: "https://leonardo2.akamaized.net/e02db860-3590-e083-a0cf-dea9d535a267/",
+        photoUrl: "https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80",
         name: "Paul",
         datetime: "20:18",
         message: "How about meeting tomorrow?",

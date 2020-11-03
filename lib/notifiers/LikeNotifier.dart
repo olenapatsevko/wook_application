@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:wook_application/entity/like.dart';
 
-class LikeNotifier with ChangeNotifier{
+class LikeNotifier extends ChangeNotifier{
 
   LikeNotifier();
 

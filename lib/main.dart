@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/direct/direct_messages_body.dart';
 import 'package:wook_application/feed/insta_body.dart';
+import 'package:wook_application/notifiers/LikeNotifier.dart';
 import 'package:wook_application/profile/profile.dart';
 import 'package:wook_application/settings/settings_screen.dart';
 import 'package:wook_application/util/hex_color.dart';
+import 'package:provider/provider.dart';
 
 
 void main() {
@@ -12,7 +14,14 @@ void main() {
 
 class TabBarDemo extends StatelessWidget {
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MultiProvider(
+      providers: [
+        // ignore: missing_required_param
+        ChangeNotifierProvider<LikeNotifier>(
+            create: (context) => LikeNotifier()
+            ),
+      ],
+    child: MaterialApp(
       color: HexColor.fromHex("#F2EFE9"),
       home: DefaultTabController(
         length: 4,
@@ -61,6 +70,6 @@ class TabBarDemo extends StatelessWidget {
           backgroundColor: HexColor.fromHex("#BFB48F"),
         ),
       ),
-    );
+    ));
   }
 }
