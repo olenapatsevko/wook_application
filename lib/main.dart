@@ -33,9 +33,9 @@ class TabBarDemo extends StatelessWidget {
         // on CatalogModel, so a ProxyProvider is needed.
         ChangeNotifierProxyProvider<BookUnsavedModel, PostSavedModel>(
           create: (context) => PostSavedModel(),
-          update: (context, catalog, cart) {
-            cart.catalog = catalog;
-            return cart;
+          update: (context, catalog, bookseen) {
+            bookseen.catalog = catalog;
+            return bookseen;
           },
         ),
       ],
