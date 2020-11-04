@@ -5,6 +5,7 @@ import 'package:wook_application/feed/book/book_saved.dart';
 import 'package:wook_application/feed/hero/hero_post.dart';
 import 'package:wook_application/util/dummy_data.dart';
 import 'package:wook_application/util/hex_color.dart';
+import 'package:provider/provider.dart';
 
 class Post extends StatefulWidget {
   final String photoUrl;
