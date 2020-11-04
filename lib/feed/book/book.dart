@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wook_application/feed/hero/hero_post.dart';
-import 'package:wook_application/feed/post.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'book_saved.dart';
 
@@ -38,9 +35,7 @@ class _CartList extends StatelessWidget {
   Widget build(BuildContext context) {
     var cart = context.watch<PostSavedModel>();
 
-    void like(Post post) {
-      post.numberOfLikes++;
-    }
+
 
     return ListView.builder(
       itemCount: cart.items.length,
@@ -63,7 +58,7 @@ class _CartList extends StatelessWidget {
                       message: cart.items[index].message,
                       numberOfLikes: cart.items[index].numberOfLikes,
                       photoUrl: cart.items[index].photoUrl,
-                      doLikeFunction: like);
+                      doLikeFunction: null);
                 }));
               },
             )),
