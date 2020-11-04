@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wook_application/feed/hero/hero_post.dart';
+import 'package:wook_application/feed/post.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'book_saved.dart';
 
@@ -35,8 +36,11 @@ class BookStorage extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Random random = new Random();
     var cart = context.watch<PostSavedModel>();
+
+    void like(Post post) {
+      post.numberOfLikes++;
+    }
 
     return ListView.builder(
       itemCount: cart.items.length,
@@ -45,7 +49,7 @@ class _CartList extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(2.0, 2.0, 8.0, 2.0),
             child: GestureDetector(
               child: Hero(
-                tag: random.nextInt(1000).toString(),
+                tag: cart.items[index].id.toString(),
                 child: Image.network(
                   cart.items[index].photoUrl,
                 ),
@@ -59,7 +63,7 @@ class _CartList extends StatelessWidget {
                       message: cart.items[index].message,
                       numberOfLikes: cart.items[index].numberOfLikes,
                       photoUrl: cart.items[index].photoUrl,
-                      doLikeFunction: null);
+                      doLikeFunction: like);
                 }));
               },
             )),
