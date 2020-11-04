@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wook_application/util/hex_color.dart';
 
-class HeroPhotoPage extends StatefulWidget {
+class HeroPost extends StatefulWidget {
   String photoUrl;
   String name;
   String datetime;
@@ -12,20 +14,20 @@ class HeroPhotoPage extends StatefulWidget {
   final Function doLikeFunction;
   int nLikes;
 
-  HeroPhotoPage(
+  HeroPost(
       {this.photoUrl,
-        this.name,
-        this.datetime,
-        this.message,
-        this.id,
-        this.numberOfLikes, this.doLikeFunction});
-
+      this.name,
+      this.datetime,
+      this.message,
+      this.id,
+      this.numberOfLikes,
+      this.doLikeFunction});
 
   @override
-  _HeroPhotoPageState createState() => _HeroPhotoPageState();
+  _HeroPostState createState() => _HeroPostState();
 }
 
-class _HeroPhotoPageState extends State<HeroPhotoPage> {
+class _HeroPostState extends State<HeroPost> {
   @override
   Widget build(BuildContext context) {
     double iconRadius = 100;
@@ -43,7 +45,7 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
               height: 300.0,
               child: Hero(
                 tag: '${widget.id}',
-                child:Image.network( widget.photoUrl),
+                child: Image.network(widget.photoUrl),
               ),
             ),
             _overflowingHeartSign(context, iconRadius),
@@ -52,7 +54,7 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
         Expanded(
           flex: 1,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: _commentLikeDirect(),
           ),
         ),
@@ -66,16 +68,12 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
                   style: TextStyle(color: Colors.white),
                 )))
       ]),
-      floatingActionButton: _downloadBtn(),
     );
   }
 
   Positioned _overflowingHeartSign(BuildContext context, double iconRadius) {
     return Positioned(
-      left: (MediaQuery
-          .of(context)
-          .size
-          .width / 2) - iconRadius,
+      left: (MediaQuery.of(context).size.width / 2) - iconRadius,
       top: iconRadius,
       child: FlatButton(
           onPressed: () {
@@ -98,7 +96,7 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
       IconButton(
         icon: Icon(
           Icons.favorite,
-          color: widget.nLikes == 0 ? Colors.white : Colors.red,
+          color: HexColor.fromHex("#564E58"),
         ),
         onPressed: () {
           setState(() {
@@ -112,27 +110,19 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
         style: TextStyle(color: widget.nLikes == 0 ? Colors.white : Colors.red),
       ),
       IconButton(
-        icon: Icon(
-          Icons.mode_comment,
-          color: Colors.white,
-        ),
-        onPressed: () {},
+        icon: new Icon(FontAwesomeIcons.book),
+        color: HexColor.fromHex("#564E58"),
+        onPressed: () {
+          //todo make cart adding
+        },
       ),
-      IconButton(
-        icon: Icon(
-          Icons.send,
-          color: Colors.white,
-        ),
-        onPressed: () {},
+      new IconButton(
+        icon: new Icon(FontAwesomeIcons.comment),
+        color: HexColor.fromHex("#564E58"),
+        onPressed: () {
+          setState(() {});
+        },
       ),
     ];
-  }
-
-  FloatingActionButton _downloadBtn() {
-    return FloatingActionButton(
-      onPressed: () {},
-      tooltip: 'download',
-      child: Icon(Icons.file_download, color: Colors.green),
-    );
   }
 }

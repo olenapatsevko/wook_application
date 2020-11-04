@@ -81,7 +81,7 @@ class PostPageState extends State<Post> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return HeroPhotoPage(name: widget.name,
+                  return HeroPost(name: widget.name,
                       datetime: widget.datetime,
                       id: widget.id,
                       message: widget.message,
@@ -103,7 +103,7 @@ class PostPageState extends State<Post> {
                         color: HexColor.fromHex("#564E58"),
                         onPressed: () {
                           setState(() {
-                            //   isPressedHeart = !isPressedHeart;
+                              doLikeFunction(1);
                           });
                         },
                       ),
@@ -117,7 +117,7 @@ class PostPageState extends State<Post> {
                             : HexColor.fromHex("#564E58"),
                         onPressed: () {
                           setState(() {
-                            //  isPressedBook = !isPressedBook;
+                            //  isPressedBook = !isPressedBook;  //todo card state add
                           });
                         },
                       ),

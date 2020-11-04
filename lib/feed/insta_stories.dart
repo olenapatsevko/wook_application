@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/feed/stories.dart';
+import 'package:wook_application/util/dummy_data.dart';
 
 class InstaStories extends StatelessWidget {
   final topText = Row(
@@ -17,9 +18,9 @@ class InstaStories extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8.0),
       child: new ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: Stories.dummyData.length,
+          itemCount: Data.dummyDataStories.length,
           itemBuilder: (context, index) {
-            Stories _stories = Stories.dummyData[index];
+            Stories _stories = Data.dummyDataStories[index];
             return new Stack(
                 alignment: Alignment.bottomRight,
                 children: <Widget>[
