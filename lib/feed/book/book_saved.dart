@@ -1,78 +1,43 @@
 import 'package:flutter/foundation.dart';
-import 'package:wook_application/feed/story/stories.dart';
+import '../post.dart';
+import 'catalog.dart';
 
-class BookSaved extends ChangeNotifier {
-  static var fakeDbStories = _initStories(); // todo we should take it from db
 
-  Map<StoryActuality, List<Story>> _storiesPartitionMap = {
-    StoryActuality.SEEN: [],
-    StoryActuality.NOT_SEEN: fakeDbStories
-  };
+class PostSavedModel extends ChangeNotifier {
+  /// The private field backing [catalog].
+  BookUnsavedModel _catalog;
 
-  Map<Story, int> _storyViewsCountMap = Map.fromIterable(fakeDbStories,
-      key: (story) => story, value: (story) => 0);
+  /// Internal, private state of the cart. Stores the ids of each item.
+  final List<int> _itemIds = [];
 
-  ///update
-  void seeTheStory(Story story) {
-    if (!_storiesPartitionMap[StoryActuality.SEEN].contains(story)) {
-      _storiesPartitionMap[StoryActuality.SEEN].add(story);
-      _storiesPartitionMap[StoryActuality.NOT_SEEN].remove(story);
-    }
+  /// The current catalog. Used to construct items from numeric ids.
+  BookUnsavedModel get catalog => _catalog;
+
+  set catalog(BookUnsavedModel newCatalog) {
+    assert(newCatalog != null);
+    assert(_itemIds.every((id) => newCatalog.getById(id) != null),
+    'The catalog $newCatalog does not have one of $_itemIds in it.');
+    _catalog = newCatalog;
+    // Notify listeners, in case the new catalog provides information
+    // different from the previous one. For example, availability of an item
+    // might have changed.
     notifyListeners();
   }
 
-  void incrementViewCount(String storyTag) {
-    Story key = _populateStoryByTag(storyTag);
-    storyViewsCountMap[key]++;
-  }
+  /// List of items in the cart.
+  List<Post> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
 
-  void seeTheStoryByTag(String storyTag) {
-    Story key = _populateStoryByTag(storyTag);
-    seeTheStory(key);
-  }
 
-  ///fail safe
-  int getViewsCountByStoryTag(String storyTag) {
-    try {
-      Story key = _populateStoryByTag(storyTag);
-      return storyViewsCountMap[key];
-    } catch (e) {
-      return 0;
-    }
-  }
-
-  ///get set
-  Map<Story, int> get storyViewsCountMap => _storyViewsCountMap;
-
-  set storyViewsCountMap(Map<Story, int> value) {
-    _storyViewsCountMap = value;
+  /// Adds [item] to cart. This is the only way to modify the cart from outside.
+  void add(Post item) {
+    _itemIds.add(item.id);
+    // This line tells [Model] that it should rebuild the widgets that
+    // depend on it.
     notifyListeners();
   }
 
-  Map<StoryActuality, List<Story>> get storiesPartitionMap =>
-      _storiesPartitionMap;
-
-  set storiesPartitionMap(Map<StoryActuality, List<Story>> value) {
-    _storiesPartitionMap = value;
+  void remove(Post item) {
+    _itemIds.remove(item.id);
     notifyListeners();
-  }
-
-  ///helper
-  Story _populateStoryByTag(String storyTag) {
-    Story key =
-    _storyViewsCountMap.keys.firstWhere((story) => story.id == storyTag);
-    return key;
-  }
-
-  /// init stub
-  static List<Story> _initStories() {
-    List<Story> stories = [];
-    for (int i = 0; i < 9; i++) {
-      stories.add(Story());
-    }
-    return stories;
   }
 }
-
-///can be replaced by bool for better performance
-enum StoryActuality { SEEN, NOT_SEEN }

@@ -1,22 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:wook_application/feed/story/stories.dart';
+import 'package:wook_application/util/dummy_data.dart';
 
 class StorySeen extends ChangeNotifier {
-  static var fakeDbStories = _initStories(); // todo we should take it from db
 
-  Map<StoryActuality, List<Story>> _storiesPartitionMap = {
-    StoryActuality.SEEN: [],
-    StoryActuality.NOT_SEEN: fakeDbStories
+
+  Map<StoryStatus, List<Story>> _storiesPartitionMap = {
+    StoryStatus.SEEN: [],
+    StoryStatus.NOT_SEEN: Data.dummyDataStories
   };
 
-  Map<Story, int> _storyViewsCountMap = Map.fromIterable(fakeDbStories,
+  Map<Story, int> _storyViewsCountMap = Map.fromIterable(Data.dummyDataStories,
       key: (story) => story, value: (story) => 0);
 
   ///update
   void seeTheStory(Story story) {
-    if (!_storiesPartitionMap[StoryActuality.SEEN].contains(story)) {
-      _storiesPartitionMap[StoryActuality.SEEN].add(story);
-      _storiesPartitionMap[StoryActuality.NOT_SEEN].remove(story);
+    if (!_storiesPartitionMap[StoryStatus.SEEN].contains(story)) {
+      _storiesPartitionMap[StoryStatus.SEEN].add(story);
+      _storiesPartitionMap[StoryStatus.NOT_SEEN].remove(story);
     }
     notifyListeners();
   }
@@ -49,10 +50,10 @@ class StorySeen extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<StoryActuality, List<Story>> get storiesPartitionMap =>
+  Map<StoryStatus, List<Story>> get storiesPartitionMap =>
       _storiesPartitionMap;
 
-  set storiesPartitionMap(Map<StoryActuality, List<Story>> value) {
+  set storiesPartitionMap(Map<StoryStatus, List<Story>> value) {
     _storiesPartitionMap = value;
     notifyListeners();
   }
@@ -64,15 +65,7 @@ class StorySeen extends ChangeNotifier {
     return key;
   }
 
-  /// init stub
-  static List<Story> _initStories() {
-    List<Story> stories = [];
-    for (int i = 0; i < 9; i++) {
-      stories.add(Story());
-    }
-    return stories;
-  }
 }
 
 ///can be replaced by bool for better performance
-enum StoryActuality { SEEN, NOT_SEEN }
+enum StoryStatus { SEEN, NOT_SEEN }

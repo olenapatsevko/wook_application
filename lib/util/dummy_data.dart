@@ -1,7 +1,9 @@
 import 'package:wook_application/feed/post.dart';
-import 'file:///F:/flutter/wook_application/lib/feed/story/stories.dart';
+import 'package:wook_application/feed/story/stories.dart';
+
 
 class Data {
+
   static final List<Post> dummyData = [
     Post(
       photoUrl:
@@ -9,7 +11,7 @@ class Data {
       name: "Paul",
       datetime: "20:18",
       message: "How about meeting tomorrow?",
-      id: "a",
+      id: 6,
       numberOfLikes: 3,
     ),
     Post(
@@ -18,7 +20,7 @@ class Data {
       name: "Mike",
       datetime: "00:56",
       message: "How about meeting tomorrow?",
-      id: "b",
+      id: 5,
       numberOfLikes: 17,
     ),
     Post(
@@ -27,7 +29,7 @@ class Data {
       name: "Helen",
       datetime: "03:34",
       message: "How about meeting tomorrow?",
-      id: "c",
+      id: 4,
       numberOfLikes: 23,
     ),
     Post(
@@ -36,7 +38,7 @@ class Data {
       name: "David",
       datetime: "19:18",
       message: "How about meeting tomorrow?",
-      id: "q",
+      id: 3,
       numberOfLikes: 67,
     ),
     Post(
@@ -45,7 +47,7 @@ class Data {
       name: "Laurent",
       datetime: "22:10",
       message: "How about meeting tomorrow?",
-      id: "m",
+      id: 2,
       numberOfLikes: 39,
     ),
   ];
@@ -56,35 +58,35 @@ class Data {
         name: "Paul",
         datetime: "20:18",
         message: "How about meeting tomorrow?",
-        id: "a1"
+        id: "1"
     ),
     Story(
         photoUrl: "https://pbs.twimg.com/media/EjgcBajWkAE1FsA?format=jpg&name=large",
         name: "Mike",
         datetime: "20:18",
         message: "How about meeting tomorrow?",
-        id: "b1"
+        id: "10"
     ),
     Story(
         photoUrl: "https://i0.wp.com/www.foodrepublic.com/wp-content/uploads/2011/11/Screen-Shot-2011-11-14-at-1.58.59-PMMR.jpg?resize=700%2C%20449&ssl=1",
         name: "Helen",
         datetime: "20:18",
         message: "How about meeting tomorrow?",
-        id: "c1"
+        id: "9"
     ),
     Story(
         photoUrl: "https://theawesomedaily.com/wp-content/uploads/2017/05/images-of-food-porn-2.jpg",
         name: "David",
         datetime: "19:18",
         message: "How about meeting tomorrow?",
-        id: "q1"
+        id: "8"
     ),
     Story(
         photoUrl: "https://theawesomedaily.com/wp-content/uploads/2017/05/images-of-food-porn-4.jpg",
         name: "Laurent",
         datetime: "20:18",
         message: "How about meeting tomorrow?",
-        id: "m1"
+        id: "7"
     ),
   ];
 

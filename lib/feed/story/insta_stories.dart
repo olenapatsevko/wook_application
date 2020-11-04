@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/feed/hero/hero_story.dart';
-import 'file:///F:/flutter/wook_application/lib/feed/story/stories.dart';
+import 'package:wook_application/feed/story/stories.dart';
 import 'package:wook_application/util/dummy_data.dart';
 
 class InstaStories extends StatelessWidget {

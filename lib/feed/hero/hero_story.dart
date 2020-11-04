@@ -36,7 +36,7 @@ class HeroStory extends StatelessWidget {
 
   FloatingActionButton _markStorySeenBtn(BuildContext context, String tag) {
     var isAlreadySeen = context.select<StorySeen, bool>(
-          (storyModel) => storyModel.storiesPartitionMap[StoryActuality.SEEN]
+          (storyModel) => storyModel.storiesPartitionMap[StoryStatus.SEEN]
           .map((story) => story.id)
           .contains(tag),
     );
@@ -57,29 +57,4 @@ class HeroStory extends StatelessWidget {
     return model.getViewsCountByStoryTag(storyTag).toString();
   }
 
-  List<Widget> _commentLikeDirect() {
-    return [
-      IconButton(
-        icon: Icon(
-          Icons.favorite,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.mode_comment,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.send,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-    ];
-  }
 }

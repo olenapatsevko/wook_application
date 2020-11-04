@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:wook_application/direct/direct_messages_body.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wook_application/feed/book/book_saved.dart';
 import 'package:wook_application/feed/insta_body.dart';
 import 'package:wook_application/feed/story/story_seen.dart';
 import 'package:wook_application/profile/profile.dart';
 import 'package:wook_application/settings/settings_screen.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'package:provider/provider.dart';
+
+import 'feed/book/book.dart';
+import 'feed/book/catalog.dart';
 
 
 void main() {
@@ -19,7 +23,21 @@ class TabBarDemo extends StatelessWidget {
         // ignore: missing_required_param
         ChangeNotifierProvider<StorySeen>(
             create: (context) => StorySeen()
+
             ),
+        // In this sample app, CatalogModel never changes, so a simple Provider
+        // is sufficient.
+        Provider(create: (context) => BookUnsavedModel()),
+        // CartModel is implemented as a ChangeNotifier, which calls for the use
+        // of ChangeNotifierProvider. Moreover, CartModel depends
+        // on CatalogModel, so a ProxyProvider is needed.
+        ChangeNotifierProxyProvider<BookUnsavedModel, PostSavedModel>(
+          create: (context) => PostSavedModel(),
+          update: (context, catalog, cart) {
+            cart.catalog = catalog;
+            return cart;
+          },
+        ),
       ],
     child: MaterialApp(
       color: HexColor.fromHex("#F2EFE9"),
@@ -33,7 +51,7 @@ class TabBarDemo extends StatelessWidget {
                 color: HexColor.fromHex("#F2EFE9"),
               ),
               new Container(
-                child: DirectBody(),
+                child: BookStorage(),
                 color: HexColor.fromHex("#F2EFE9"),
               ),
               new Container(
@@ -52,7 +70,7 @@ class TabBarDemo extends StatelessWidget {
                 icon: new Icon(Icons.home),
               ),
               Tab(
-                icon: new Icon(Icons.message_sharp),
+                icon: new Icon(FontAwesomeIcons.book),
               ),
               Tab(
                 icon: new Icon(Icons.perm_identity),
