@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/direct/direct_messages_body.dart';
 import 'package:wook_application/feed/insta_body.dart';
-import 'package:wook_application/notifiers/LikeNotifier.dart';
+import 'package:wook_application/feed/story/story_seen.dart';
 import 'package:wook_application/profile/profile.dart';
 import 'package:wook_application/settings/settings_screen.dart';
 import 'package:wook_application/util/hex_color.dart';
@@ -17,8 +17,8 @@ class TabBarDemo extends StatelessWidget {
     return MultiProvider(
       providers: [
         // ignore: missing_required_param
-        ChangeNotifierProvider<LikeNotifier>(
-            create: (context) => LikeNotifier()
+        ChangeNotifierProvider<StorySeen>(
+            create: (context) => StorySeen()
             ),
       ],
     child: MaterialApp(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wook_application/feed/stories.dart';
+import 'package:wook_application/feed/hero/hero_story.dart';
+import 'file:///F:/flutter/wook_application/lib/feed/story/stories.dart';
 import 'package:wook_application/util/dummy_data.dart';
 
 class InstaStories extends StatelessWidget {
@@ -20,7 +21,7 @@ class InstaStories extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: Data.dummyDataStories.length,
           itemBuilder: (context, index) {
-            Stories _stories = Data.dummyDataStories[index];
+            Story _stories = Data.dummyDataStories[index];
             return new Stack(
                 alignment: Alignment.bottomRight,
                 children: <Widget>[
@@ -34,7 +35,11 @@ class InstaStories extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return StoriesScreen(_stories);
+                          return HeroStory(
+                            image: _stories.photoUrl,
+                            id: _stories.id,
+                            username: _stories.name,
+                          );
                         }));
                       },
                     ),
@@ -61,8 +66,9 @@ class InstaStories extends StatelessWidget {
     );
   }
 }
+
 class StoriesScreen extends StatelessWidget {
-  final Stories _post;
+  final Story _post;
 
   StoriesScreen(this._post);
 

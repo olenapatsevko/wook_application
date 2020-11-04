@@ -1,4 +1,4 @@
-class Stories {
+class Story {
    String photoUrl;
    String name;
    String datetime;
@@ -6,6 +6,6 @@ class Stories {
    String id;
   bool seen  = false;
 
-  Stories({this.photoUrl, this.name, this.datetime, this.message, this.id});
+  Story({this.photoUrl, this.name, this.datetime, this.message, this.id});
 
 }

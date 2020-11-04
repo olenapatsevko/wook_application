@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/util/dummy_data.dart';
 import 'post.dart';
-import 'insta_stories.dart';
+import 'story/insta_stories.dart';
 
 class InstaList extends StatefulWidget {
   @override

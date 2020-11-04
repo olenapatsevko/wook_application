@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wook_application/feed/insta_list.dart';
+import 'file:///F:/flutter/wook_application/lib/feed/story/insta_list.dart';
 import 'chat_model.dart';
 
 class DirectMessages extends StatefulWidget {
