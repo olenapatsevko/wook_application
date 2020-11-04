@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wook_application/feed/story/story_seen.dart';
+import 'package:wook_application/util/hex_color.dart';
 
 class HeroStory extends StatelessWidget {
   final String username;
@@ -13,7 +14,7 @@ class HeroStory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: HexColor.fromHex("#F2EFE9"),
       appBar: AppBar(
         title: Text('$username'),
       ),
@@ -25,9 +26,9 @@ class HeroStory extends StatelessWidget {
           ),
         ),
         Text(
-          "view count: " + _populateViewsCount(context, id),
+          "views " + _populateViewsCount(context, id),
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         )
       ]),
       floatingActionButton: _markStorySeenBtn(context, id),
@@ -36,7 +37,7 @@ class HeroStory extends StatelessWidget {
 
   FloatingActionButton _markStorySeenBtn(BuildContext context, String tag) {
     var isAlreadySeen = context.select<StorySeen, bool>(
-          (storyModel) => storyModel.storiesPartitionMap[StoryStatus.SEEN]
+          (storyModel) => storyModel.storiesPartitionMap[true]
           .map((story) => story.id)
           .contains(tag),
     );
@@ -46,9 +47,8 @@ class HeroStory extends StatelessWidget {
         final model = Provider.of<StorySeen>(context,  listen: false);
         model.seeTheStoryByTag(tag);
       },
-      tooltip: 'mark as seen',
       child: Icon(Icons.remove_red_eye,
-          color: isAlreadySeen ? Colors.red : Colors.green),
+          color: isAlreadySeen ? HexColor.fromHex("#904E55") : HexColor.fromHex("#BFB48F")),
     );
   }
 

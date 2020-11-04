@@ -18,9 +18,6 @@ class PostSavedModel extends ChangeNotifier {
     assert(_itemIds.every((id) => newCatalog.getById(id) != null),
     'The catalog $newCatalog does not have one of $_itemIds in it.');
     _catalog = newCatalog;
-    // Notify listeners, in case the new catalog provides information
-    // different from the previous one. For example, availability of an item
-    // might have changed.
     notifyListeners();
   }
 

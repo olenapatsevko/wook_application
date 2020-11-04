@@ -30,7 +30,6 @@ class HeroPost extends StatefulWidget {
 class _HeroPostState extends State<HeroPost> {
   @override
   Widget build(BuildContext context) {
-    double iconRadius = 100;
 
     return Scaffold(
       backgroundColor: HexColor.fromHex("#F2EFE9"),
@@ -83,20 +82,7 @@ class _HeroPostState extends State<HeroPost> {
         ' ${widget.numberOfLikes}',
         style: TextStyle(color: Colors.black),
       ),
-      IconButton(
-        icon: new Icon(FontAwesomeIcons.book),
-        color: HexColor.fromHex("#564E58"),
-        onPressed: () {
-          //todo make cart adding
-        },
-      ),
-      new IconButton(
-        icon: new Icon(FontAwesomeIcons.comment),
-        color: HexColor.fromHex("#564E58"),
-        onPressed: () {
-          setState(() {});
-        },
-      ),
+
     ];
   }
 }

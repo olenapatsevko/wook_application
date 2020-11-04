@@ -186,7 +186,7 @@ class PostPageState extends State<Post> {
     );
   }
 
-  void doLikeFunction(int nLikes) {
+ void doLikeFunction(int nLikes) {
     setState(() {
       widget.numberOfLikes += nLikes;
     });
@@ -214,24 +214,23 @@ class _AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isInCart = context.select<PostSavedModel, bool>(
-      (cart) => cart.items.contains(new Post(
-        name: name,
-        datetime: datetime,
-        id: id,
-        message: message,
-        numberOfLikes: numberOfLikes,
-        photoUrl: photoUrl,
-      )),
-    );
+          (cart) {
+            for(Post p in cart.items){
+              if(p.id == this.id){
+                return true;
+              }
+            }
+            return false;
+
+      },
+    )
+
+    ;
 
     return FlatButton(
       onPressed: isInCart
           ? null
           : () {
-              // If the item is not in cart, we let the user add it.
-              // We are using context.read() here because the callback
-              // is executed whenever the user taps the button. In other
-              // words, it is executed outside the build method.
               var cart = context.read<PostSavedModel>();
               cart.add(new Post(
                 name: name,
@@ -243,7 +242,7 @@ class _AddButton extends StatelessWidget {
               ));
             },
       splashColor: Theme.of(context).primaryColor,
-      child: isInCart ? Icon(Icons.check, semanticLabel: 'ADDED') : Text('ADD'),
+      child: isInCart ? Icon(Icons.check, semanticLabel: 'ADDED') : new Icon(FontAwesomeIcons.book),
     );
   }
 }
