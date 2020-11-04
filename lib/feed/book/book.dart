@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wook_application/feed/hero/hero_post.dart';
+import 'package:wook_application/feed/post.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'book_saved.dart';
 
@@ -58,7 +59,7 @@ class _CartList extends StatelessWidget {
                       message: cart.items[index].message,
                       numberOfLikes: cart.items[index].numberOfLikes,
                       photoUrl: cart.items[index].photoUrl,
-                      doLikeFunction: null);
+                      doLikeFunction: PostPageState().doLikeFunction);
                 }));
               },
             )),

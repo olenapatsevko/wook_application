@@ -186,7 +186,7 @@ class PostPageState extends State<Post> {
     );
   }
 
- void doLikeFunction(int nLikes) {
+  void doLikeFunction(int nLikes) {
     setState(() {
       widget.numberOfLikes += nLikes;
     });
