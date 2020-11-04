@@ -33,61 +33,31 @@ class _HeroPostState extends State<HeroPost> {
     double iconRadius = 100;
 
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: HexColor.fromHex("#F2EFE9"),
       appBar: AppBar(
-        title: Text('${widget.name}'),
+        backgroundColor: HexColor.fromHex("#F2EFE9"),
       ),
       body: Column(children: <Widget>[
         Stack(
           children: [
             Container(
-              width: 200.0,
-              height: 300.0,
-              child: Hero(
-                tag: '${widget.id}',
-                child: Image.network(widget.photoUrl),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 16.0, 8.0, 16.0),
+                child: Hero(
+                  tag: '${widget.id}',
+                  child: Image.network(widget.photoUrl),
+                ),
               ),
             ),
-            _overflowingHeartSign(context, iconRadius),
           ],
         ),
         Expanded(
-          flex: 1,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: _commentLikeDirect(),
           ),
         ),
-        Expanded(
-            flex: 3,
-            child: Padding(
-                padding: EdgeInsets.all(40),
-                child: Text(
-                  widget.message,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white),
-                )))
       ]),
-    );
-  }
-
-  Positioned _overflowingHeartSign(BuildContext context, double iconRadius) {
-    return Positioned(
-      left: (MediaQuery.of(context).size.width / 2) - iconRadius,
-      top: iconRadius,
-      child: FlatButton(
-          onPressed: () {
-            int randomLikeQuantity = 2;
-            setState(() {
-              widget.nLikes += randomLikeQuantity;
-            });
-            widget.doLikeFunction(randomLikeQuantity);
-          },
-          child: Icon(
-            Icons.favorite_border,
-            color: Color.fromRGBO(255, 255, 255, 0.35),
-            size: iconRadius * 2,
-          )),
     );
   }
 
@@ -100,14 +70,14 @@ class _HeroPostState extends State<HeroPost> {
         ),
         onPressed: () {
           setState(() {
-            widget.nLikes += 1;
+            widget.doLikeFunction(1);
           });
-          widget.doLikeFunction(1);
         },
       ),
       Text(
-        'Likes: ${widget.nLikes}',
-        style: TextStyle(color: widget.nLikes == 0 ? Colors.white : Colors.red),
+        ' ${widget.numberOfLikes}',
+        style: TextStyle(
+            color: widget.numberOfLikes == 0 ? Colors.white : Colors.red),
       ),
       IconButton(
         icon: new Icon(FontAwesomeIcons.book),
