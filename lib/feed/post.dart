@@ -34,6 +34,17 @@ class Post extends StatefulWidget {
 
   @override
   PostPageState createState() => PostPageState();
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      photoUrl: json['photoUrl'] as String,
+      name: json['name'] as String,
+      datetime: json['datetime'] as String,
+      message: json['message'] as String,
+      numberOfLikes: json['numberOfLikes'] as int,
+      id: json['id'] as int,
+    );
+  }
 }
 
 class PostPageState extends State<Post> {

@@ -37,18 +37,20 @@ class HeroStory extends StatelessWidget {
 
   FloatingActionButton _markStorySeenBtn(BuildContext context, String tag) {
     var isAlreadySeen = context.select<StorySeen, bool>(
-          (storyModel) => storyModel.storiesPartitionMap[true]
+      (storyModel) => storyModel.storiesPartitionMap[true]
           .map((story) => story.id)
           .contains(tag),
     );
 
     return FloatingActionButton(
       onPressed: () {
-        final model = Provider.of<StorySeen>(context,  listen: false);
+        final model = Provider.of<StorySeen>(context, listen: false);
         model.seeTheStoryByTag(tag);
       },
       child: Icon(Icons.remove_red_eye,
-          color: isAlreadySeen ? HexColor.fromHex("#904E55") : HexColor.fromHex("#BFB48F")),
+          color: isAlreadySeen
+              ? HexColor.fromHex("#904E55")
+              : HexColor.fromHex("#BFB48F")),
     );
   }
 
@@ -56,5 +58,4 @@ class HeroStory extends StatelessWidget {
     final model = Provider.of<StorySeen>(context);
     return model.getViewsCountByStoryTag(storyTag).toString();
   }
-
 }
