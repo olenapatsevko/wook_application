@@ -11,7 +11,7 @@ class Data {
       name: "Paul",
       datetime: "20:18",
       message: "How about meeting tomorrow?",
-      id: 6,
+      id: 1,
       numberOfLikes: 3,
     ),
     Post(
@@ -20,7 +20,7 @@ class Data {
       name: "Mike",
       datetime: "00:56",
       message: "How about meeting tomorrow?",
-      id: 5,
+      id: 2,
       numberOfLikes: 17,
     ),
     Post(
@@ -29,7 +29,7 @@ class Data {
       name: "Helen",
       datetime: "03:34",
       message: "How about meeting tomorrow?",
-      id: 4,
+      id: 3,
       numberOfLikes: 23,
     ),
     Post(
@@ -38,7 +38,7 @@ class Data {
       name: "David",
       datetime: "19:18",
       message: "How about meeting tomorrow?",
-      id: 3,
+      id: 4,
       numberOfLikes: 67,
     ),
     Post(
@@ -47,7 +47,7 @@ class Data {
       name: "Laurent",
       datetime: "22:10",
       message: "How about meeting tomorrow?",
-      id: 2,
+      id: 5,
       numberOfLikes: 39,
     ),
   ];
