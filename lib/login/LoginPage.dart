@@ -118,10 +118,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _navigator() {
     if (username.text.length != 0 || password.text.length != 0) {
-      Navigator.of(context).pushAndRemoveUntil(
-          new MaterialPageRoute(
-              builder: (BuildContext context) => new HomeScreen()),
-          (Route<dynamic> route) => false);
+      Navigator.pushNamed(context, '/second');
     } else {
       showDialog(
           context: context,

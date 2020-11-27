@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wook_application/settings/components/settings_tile.dart';
-import 'extensions.dart';
+
 import 'abstract_section.dart';
 import 'cupertino_settings_section.dart';
 
@@ -21,21 +21,9 @@ class SettingsSection extends AbstractSection {
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    if (platform.isIOS)
-      return iosSection();
-    else if (platform.isAndroid)
-      return androidSection(context);
-    else
       return androidSection(context);
   }
 
-  Widget iosSection() {
-    return CupertinoSettingsSection(
-      tiles,
-      header: title == null ? null : Text(title, style: titleTextStyle),
-    );
-  }
 
   Widget androidSection(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

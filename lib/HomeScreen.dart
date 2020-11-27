@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wook_application/feed/book/book_saved.dart';
 import 'package:wook_application/profile/profile.dart';
 import 'package:wook_application/settings/settings_screen.dart';
-import 'package:wook_application/util/hex_color.dart';
 
+import 'bottom_navigation/destination.dart';
 import 'feed/book/book.dart';
 import 'feed/book/catalog.dart';
-import 'feed/insta_body.dart';
+import 'feed/insta_list.dart';
 import 'feed/story/story_seen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,22 +15,17 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with TickerProviderStateMixin<HomeScreen> {
+  int _currentIndex = 0;
 
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           // ignore: missing_required_param
-          ChangeNotifierProvider<StorySeen>(
-              create: (context) => StorySeen()
-
-          ),
-          // In this sample app, CatalogModel never changes, so a simple Provider
-          // is sufficient.
+          ChangeNotifierProvider<StorySeen>(create: (context) => StorySeen()),
           Provider(create: (context) => BookUnsavedModel()),
-          // CartModel is implemented as a ChangeNotifier, which calls for the use
-          // of ChangeNotifierProvider. Moreover, CartModel depends
-          // on CatalogModel, so a ProxyProvider is needed.
           ChangeNotifierProxyProvider<BookUnsavedModel, PostSavedModel>(
             create: (context) => PostSavedModel(),
             update: (context, catalog, bookseen) {
@@ -40,54 +34,46 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ],
-        child: MaterialApp(
-          color: HexColor.fromHex("#F2EFE9"),
-          home: DefaultTabController(
-            length: 4,
-            child: new Scaffold(
-              body: TabBarView(
-                children: [
-                  new Container(
-                    child: InstaBody(),
-                    color: HexColor.fromHex("#F2EFE9"),
-                  ),
-                  new Container(
-                    child: BookStorage(),
-                    color: HexColor.fromHex("#F2EFE9"),
-                  ),
-                  new Container(
-                    child: Profile(),
-                    color: HexColor.fromHex("#F2EFE9"),
-                  ),
-                  new Container(
-                    child: SettingsScreen(),
-                    color: HexColor.fromHex("#F2EFE9"),
-                  ),
-                ],
-              ),
-              bottomNavigationBar: new TabBar(
-                tabs: [
-                  Tab(
-                    icon: new Icon(Icons.home),
-                  ),
-                  Tab(
-                    icon: new Icon(FontAwesomeIcons.book),
-                  ),
-                  Tab(
-                    icon: new Icon(Icons.perm_identity),
-                  ),
-                  Tab(
-                    icon: new Icon(Icons.settings),
-                  )
-                ],
-                labelColor: Colors.black87,
-                unselectedLabelColor: HexColor.fromHex("#564E58"),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorPadding: EdgeInsets.all(5.0),
-                indicatorColor: HexColor.fromHex("#904E55"),
-              ),
-              backgroundColor: HexColor.fromHex("#BFB48F"),
+        child: Scaffold(
+          body: SafeArea(
+            top: false,
+            child: IndexedStack(
+              index: _currentIndex,
+              children: allDestinations.map<Widget>((Destination destination) {
+                switch (destination.title) {
+                  case 'Home':
+                    {
+                      return InstaListView(destination);
+                    }
+                  case 'Cook Book':
+                    {
+                      return BookStorageView(destination: destination);
+                    }
+                  case 'Profile':
+                    {
+                      return ProfileView(destination: destination);
+                    }
+                  case 'Settings':
+                    {
+                      return SettingsView(destination: destination);
+                    }
+                }
+              }).toList(),
             ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: allDestinations.map((Destination destination) {
+              return BottomNavigationBarItem(
+                  icon: Icon(destination.icon),
+                  backgroundColor: destination.color,
+                  label: destination.title);
+            }).toList(),
           ),
         ));
   }

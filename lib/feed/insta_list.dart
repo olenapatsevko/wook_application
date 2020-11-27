@@ -1,40 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:wook_application/util/dummy_data.dart';
+import 'package:wook_application/bottom_navigation/destination.dart';
 import 'post.dart';
-import 'story/insta_stories.dart';
 
-class InstaList extends StatefulWidget {
+class InstaListView extends StatefulWidget {
+
+  final Destination destination;
+
+
+  InstaListView(this.destination);
+
   @override
-  _InstaListState createState() => _InstaListState();
+  _InstaListViewState createState() => _InstaListViewState();
+
+
 }
 
-class _InstaListState extends State<InstaList> {
-  @override
-  Widget build(BuildContext context) {
-    return new Post();
+class _InstaListViewState extends State<InstaListView> {
 
-  }
+@override
+Widget build(BuildContext context) {
+  return new Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: <Widget>[
+      Flexible(child: new Post())
+    ],
+  );
 }
-
-class DetailScreen extends StatelessWidget {
-  final Post _post;
-
-  DetailScreen(this._post);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-          child: Hero(
-            tag: _post.id,
-            child: Image.network(_post.photoUrl),
-          ),
-        ),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
 }

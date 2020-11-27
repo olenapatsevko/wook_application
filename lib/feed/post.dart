@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:wook_application/feed/book/book_saved.dart';
-import 'package:wook_application/feed/hero/hero_post.dart';
 import 'package:wook_application/feed/story/detail.dart';
 import 'package:wook_application/http/http_service.dart';
 import 'package:wook_application/util/dummy_data.dart';
-import 'package:wook_application/util/hex_color.dart';
-import 'package:provider/provider.dart';
 
 class Post extends StatefulWidget {
   final String photoUrl;
@@ -103,7 +101,7 @@ class PostPageState extends State<Post> {
 
   void doLikeFunction(int nLikes, Post post) {
     setState(() {
-      post.numberOfLikes +=1;
+      post.numberOfLikes += 1;
       widget.numberOfLikes += nLikes;
     });
   }

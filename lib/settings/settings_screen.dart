@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:wook_application/bottom_navigation/destination.dart';
 import 'package:wook_application/settings/components/custom_section.dart';
 import 'package:wook_application/settings/components/settings_list.dart';
 import 'package:wook_application/settings/components/settings_section.dart';
 import 'package:wook_application/settings/components/settings_tile.dart';
 import 'languages_screen.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsView extends StatefulWidget {
+  final Destination destination;
+  const SettingsView({ Key key, this.destination }) : super(key: key);
+
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  _SettingsViewState createState() => _SettingsViewState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsViewState extends State<SettingsView> {
   bool lockInBackground = true;
   bool notificationsEnabled = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SettingsList(
         // backgroundColor: Colors.orange,
+
         sections: [
           SettingsSection(
             title: 'Common',
@@ -34,10 +40,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               SettingsTile(
-                title: 'Environment',
-                subtitle: 'Production',
-                leading: Icon(Icons.cloud_queue),
-                onTap: () => print('e'),
+                title: 'Exit',
+                subtitle: 'Exit an app',
+                leading: Icon(Icons.exit_to_app),
+                onTap: () => Navigator.popAndPushNamed(context, '/second'),
               ),
             ],
           ),
@@ -105,10 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Color(0xFF777777),
                   ),
                 ),
-                Text(
-                  'Version: 2.4.0 (287)',
-                  style: TextStyle(color: Color(0xFF777777)),
-                ),
+
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wook_application/HomeScreen.dart';
 
 import 'login/LoginPage.dart';
 
@@ -13,7 +14,11 @@ class TabBarDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'SharedPreferences',
-      home: new LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/second': (context) => HomeScreen(),
+      },
     );
   }
 }
