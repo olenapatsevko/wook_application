@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wook_application/feed/book/book_saved.dart';
 import 'package:wook_application/feed/hero/hero_post.dart';
+import 'package:wook_application/feed/story/detail.dart';
+import 'package:wook_application/http/http_service.dart';
 import 'package:wook_application/util/dummy_data.dart';
 import 'package:wook_application/util/hex_color.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +50,10 @@ class Post extends StatefulWidget {
 }
 
 class PostPageState extends State<Post> {
-  @override
+
+  final HttpService httpService = HttpService();
+
+ /* @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -194,8 +199,41 @@ class PostPageState extends State<Post> {
           child: Text(widget.datetime, style: TextStyle(color: Colors.grey)),
         )
       ],
-    );
-  }
+    );*/
+
+    @override
+    Widget build(BuildContext context) {
+      return Container(
+        child: FutureBuilder(
+          future: httpService.getPosts(),
+          builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
+            if (snapshot.hasData) {
+              List<Post> posts = snapshot.data;
+              return ListView(
+                children: posts
+                    .map(
+                      (Post post) => ListTile(
+                    title: Text(post.name),
+                    subtitle: Text("${post.id}"),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PostDetail(
+                          post: post,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                    .toList(),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
+      );
+    }
+
 
   void doLikeFunction(int nLikes) {
     setState(() {
