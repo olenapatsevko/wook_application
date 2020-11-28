@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../HomeScreen.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -45,10 +43,8 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           new Container(
             margin: EdgeInsets.all(30.0),
-            child: new Image.asset(
-              "assets/images/flutter_icon.png",
-              height: 100.0,
-            ),
+            child: new Image.asset("images/flutter_icon.png"),
+            height: 100.0,
           ),
           new TextField(
             controller: username,

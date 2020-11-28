@@ -4,11 +4,13 @@ import 'package:wook_application/settings/components/custom_section.dart';
 import 'package:wook_application/settings/components/settings_list.dart';
 import 'package:wook_application/settings/components/settings_section.dart';
 import 'package:wook_application/settings/components/settings_tile.dart';
+
 import 'languages_screen.dart';
 
 class SettingsView extends StatefulWidget {
   final Destination destination;
-  const SettingsView({ Key key, this.destination }) : super(key: key);
+
+  const SettingsView({Key key, this.destination}) : super(key: key);
 
   @override
   _SettingsViewState createState() => _SettingsViewState();
@@ -21,7 +23,12 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Text(
+          widget.destination.title,
+        ),
+        backgroundColor: widget.destination.color,
+      ),
       body: SettingsList(
         // backgroundColor: Colors.orange,
 
@@ -111,7 +118,6 @@ class _SettingsViewState extends State<SettingsView> {
                     color: Color(0xFF777777),
                   ),
                 ),
-
               ],
             ),
           ),

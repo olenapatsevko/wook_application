@@ -19,11 +19,18 @@ class _InstaListViewState extends State<InstaListView> {
 
 @override
 Widget build(BuildContext context) {
-  return new Column(
+  return Scaffold(
+      appBar: AppBar(
+      title: Text(
+      widget.destination.title,
+  ),
+  backgroundColor:widget.destination.color,
+  ),
+  body: new Column(
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
       Flexible(child: new Post())
     ],
-  );
+  ));
 }
 }

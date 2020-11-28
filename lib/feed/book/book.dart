@@ -23,8 +23,8 @@ class _CartList extends State<BookStorageView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book'),
-        backgroundColor: HexColor.fromHex("#904E55"),
+        title: Text(widget.destination.title),
+        backgroundColor: widget.destination.color,
       ),
       body: Container(
         color: HexColor.fromHex("#F2EFE9"),
