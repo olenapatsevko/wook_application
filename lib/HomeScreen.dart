@@ -40,24 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
             child: IndexedStack(
               index: _currentIndex,
               children: allDestinations.map<Widget>((Destination destination) {
-                switch (destination.title) {
-                  case 'Home':
-                    {
-                      return InstaListView(destination);
-                    }
-                  case 'Cook Book':
-                    {
-                      return BookStorageView(destination: destination);
-                    }
-                  case 'Profile':
-                    {
-                      return ProfileView(destination: destination);
-                    }
-                  case 'Settings':
-                    {
-                      return SettingsView(destination: destination);
-                    }
-                }
+                return getPage(destination);
               }).toList(),
             ),
           ),
@@ -76,5 +59,23 @@ class _HomeScreenState extends State<HomeScreen>
             }).toList(),
           ),
         ));
+  }
+
+  StatefulWidget getPage(Destination destination) {
+    switch (destination.title) {
+      case 'Home':
+        {
+          return InstaListView(destination);
+        }
+      case 'Cook Book':
+        {
+          return BookStorageView(destination: destination);
+        }
+      case 'Profile':
+        {
+          return ProfileView(destination: destination);
+        }
+    }
+    return SettingsView(destination: destination);
   }
 }

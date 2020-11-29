@@ -5,20 +5,17 @@ import 'package:wook_application/util/dummy_data.dart';
 class StorySeen extends ChangeNotifier {
   static List<Story> stories = List.from(Data.dummyDataStories);
 
-  Map<bool, List<Story>> _storiesPartitionMap = {
-    true: [],
-   false: stories
-  };
+  Map<bool, List<Story>> _storiesPartitionMap = {true: [], false: stories};
 
-  Map<Story, int> _storyViewsCountMap = Map.fromIterable(stories,
-      key: (story) => story, value: (story) => 0);
+  Map<Story, int> _storyViewsCountMap =
+      Map.fromIterable(stories, key: (story) => story, value: (story) => 0);
 
   ///update
   void seeTheStory(Story story) {
     if (!_storiesPartitionMap[true].contains(story)) {
       _storiesPartitionMap[true].add(story);
       _storiesPartitionMap[false].remove(story);
-    }else{
+    } else {
       _storiesPartitionMap[false].add(story);
       _storiesPartitionMap[true].remove(story);
     }
@@ -27,13 +24,15 @@ class StorySeen extends ChangeNotifier {
 
   void incrementViewCount(String storyTag) {
     Story key = _populateStoryByTag(storyTag);
-    if(storyViewsCountMap[key]==0){
-    storyViewsCountMap[key]++;}else{
+    if (storyViewsCountMap[key] == 0) {
+      storyViewsCountMap[key]++;
+    } else {
       _storiesPartitionMap.remove(key);
-    decrementViewCount(storyTag);}
+      decrementViewCount(storyTag);
+    }
   }
 
-  void decrementViewCount(String storyTag){
+  void decrementViewCount(String storyTag) {
     Story key = _populateStoryByTag(storyTag);
     storyViewsCountMap[key]--;
   }
@@ -62,8 +61,7 @@ class StorySeen extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<bool, List<Story>> get storiesPartitionMap =>
-      _storiesPartitionMap;
+  Map<bool, List<Story>> get storiesPartitionMap => _storiesPartitionMap;
 
   set storiesPartitionMap(Map<bool, List<Story>> value) {
     _storiesPartitionMap = value;
@@ -73,10 +71,7 @@ class StorySeen extends ChangeNotifier {
   ///helper
   Story _populateStoryByTag(String storyTag) {
     Story key =
-    _storyViewsCountMap.keys.firstWhere((story) => story.id == storyTag);
+        _storyViewsCountMap.keys.firstWhere((story) => story.id == storyTag);
     return key;
   }
-
 }
-
-

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wook_application/settings/components/settings_section.dart';
 import 'package:wook_application/settings/components/settings_tile.dart';
-import 'components/settings_list.dart';
 
+import 'components/settings_list.dart';
 
 class LanguagesScreen extends StatefulWidget {
   @override

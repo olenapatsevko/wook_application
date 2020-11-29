@@ -13,8 +13,8 @@ class HeroPost extends StatefulWidget {
   final Function doLikeFunction;
   int nLikes;
 
-  HeroPost({
-      this.photoUrl,
+  HeroPost(
+      {this.photoUrl,
       this.name,
       this.datetime,
       this.message,
@@ -29,7 +29,6 @@ class HeroPost extends StatefulWidget {
 class _HeroPostState extends State<HeroPost> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: HexColor.fromHex("#F2EFE9"),
       appBar: AppBar(
@@ -81,7 +80,6 @@ class _HeroPostState extends State<HeroPost> {
         ' ${widget.numberOfLikes}',
         style: TextStyle(color: Colors.black),
       ),
-
     ];
   }
 }

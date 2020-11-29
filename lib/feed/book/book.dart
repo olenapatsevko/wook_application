@@ -8,9 +8,9 @@ import 'package:wook_application/util/hex_color.dart';
 import 'book_saved.dart';
 
 class BookStorageView extends StatefulWidget {
-
   final Destination destination;
-  const BookStorageView({ Key key, this.destination }) : super(key: key);
+
+  const BookStorageView({Key key, this.destination}) : super(key: key);
 
   @override
   _CartList createState() => _CartList();

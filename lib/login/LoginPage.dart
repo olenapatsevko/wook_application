@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           new Container(
             margin: EdgeInsets.all(30.0),
-            child: new Image.asset("images/flutter_icon.png"),
+            child: new Image.asset("assets/images/flutter_icon.png"),
             height: 100.0,
           ),
           new TextField(

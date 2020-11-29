@@ -1,15 +1,12 @@
 import 'package:flutter/foundation.dart';
+
 import '../post.dart';
 import 'catalog.dart';
 
-
 class PostSavedModel extends ChangeNotifier {
-
   BookUnsavedModel _catalog;
 
-
   final List<int> _itemIds = [];
-
 
   BookUnsavedModel get catalog => _catalog;
 
