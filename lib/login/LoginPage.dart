@@ -119,17 +119,17 @@ class _LoginPageState extends State<LoginPage> {
       showDialog(
           context: context,
           barrierDismissible: false,
-          child: new CupertinoAlertDialog(
-            content: new Text(
+          child: CupertinoAlertDialog(
+            content:  Text(
               "username or password \ncan't be empty",
-              style: new TextStyle(fontSize: 16.0),
+              style: TextStyle(fontSize: 16.0),
             ),
             actions: <Widget>[
               new FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: new Text("OK"))
+                  child:  Text("OK"))
             ],
           ));
     }
